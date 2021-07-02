@@ -24,23 +24,19 @@ setTimeout(() => {
     } y tu carpeta es ${os.homedir()}`
   );
   console.log(`Éstos son los archivos y carpetas de tu carpeta de usuario:`);
-  fs.readdir("C:\\Users\\Raúl Navarro Uribe", (err, archivos) => {
+  fs.readdir(os.homedir(), (err, archivos) => {
     if (err) {
       console.log("Algo no funciona");
       return;
     }
     for (const archivo of archivos) {
-      fs.stat(`C:\\Users\\Raúl Navarro Uribe\\${archivo}`, (err, stats) => {
+      fs.stat(`${os.homedir}\\${archivo}`, (err, stats) => {
         if (err) {
           console.log("Algo va mal");
         }
         console.log(
-          `${archivo}: ${stats.size} bytes, ${
-            fs
-              .lstatSync(`C:\\Users\\Raúl Navarro Uribe\\${archivo}`)
-              .isDirectory()
-              ? "Directory"
-              : "File"
+          `${archivo} pesa ${stats.size} bytes y es un ${
+            stats.isDirectory ? "directorio" : "archivo"
           }`
         );
       });
